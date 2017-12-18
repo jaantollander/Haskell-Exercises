@@ -1,17 +1,22 @@
 # Haskell Exercises
-[Ninety-Nine Haskell Problem](https://wiki.haskell.org/H-99:_Ninety-Nine_Haskell_Problems)
+This repository contains practice code and my solutions for [Ninety-Nine Haskell Problems](https://wiki.haskell.org/H-99:_Ninety-Nine_Haskell_Problems).
 
-Install Haskell
+## Introduction
+[Haskell](https://www.haskell.org/) is purely functional programming language.
 
-* https://www.haskell.org/platform
+## Install Haskell
+Get started with Haskell by downloading compilers and package managers from [https://www.haskell.org/platform](https://www.haskell.org/platform).
 
-Learn Haskell
+## Learn Haskell
+Some good resources for learning Haskell
 
-* http://learnyouahaskell.com
-* learn.hfm.io
-* https://hackage.haskell.org/package/base-4.10.1.0/docs/Prelude.html
+* [Haskell Wiki](https://wiki.haskell.org/Haskell)
+* [Learn you a Haskell for Great Good! (Book)](http://learnyouahaskell.com)
+* [Learning Haskell](learn.hfm.io)
+* [Prelude (Haskell standard library reference)]( https://hackage.haskell.org/package/base-4.10.1.0/docs/Prelude.html)
 
-## Interactive Testing
+## Interactive Developement
+Develop Haskell code interactively using
 
 ```
 ghci <filename>.hs
