@@ -21,3 +21,7 @@ Develop Haskell code interactively using
 ```
 ghci <filename>.hs
 ```
+
+## Progress
+- [ ] 01 - 10
+- [ ] 11 - 20

@@ -1,39 +1,57 @@
 -- Problem 1
+-- Find the last element of a list.
+-- Takes the tail of the list until one element left.
 myLast :: [a] -> a
 myLast [] = error ""
 myLast [x] = x
-myLast l = l !! (length l - 1)
+myLast (_:xs) = myLast xs
+
 
 -- Problem 2
+-- Find the last but one element of a list.
 myButLast :: [a] -> a
 myButLast [] = error ""
 myButLast [x] = error ""
-myButLast l = l !! (length l - 2)
+myButLast [x1, x2] = x1
+myButLast (_:xs) = myButLast xs
+
 
 -- Problem 3
+-- Find the K'th element of a list. The first element in the list is number 1.
 elementAt :: [a] -> Int -> a
-elementAt l i = l !! (i - 1)
+elementAt [] _ = error ""
+elementAt (x:xs) k | k == 1    = x
+                   | k < 1     = error ""
+                   | otherwise = elementAt xs (k - 1)
+
 
 -- Problem 4
-incrementer :: Int -> a -> Int
-incrementer x _ = x + 1
+-- Find the number of elements of a list.
 myLength :: [a] -> Int
-myLength l = foldl incrementer 0 l
+myLength [] = 0
+myLength (_:xs) = 1 + myLength xs
+
 
 -- Problem 5
-reverse' :: [a] -> [a] -> [a]
-reverse' h [] = h
-reverse' h t = reverse' (head t : h) (tail t)
-
+-- Reverse a list.
 myReverse :: [a] -> [a]
-myReverse l = reverse' [] l
+myReverse list = reverse' [] list
+  where
+    reverse' out [] = out
+    reverse' out (x:xs) = reverse' (x : out) xs
 
 
 -- Problem 6
+-- Find out whether a list is a palindrome. A palindrome can be read forward or
+-- backward; e.g. (x a m a x).
 isPalindrome :: Eq a => [a] -> Bool
-isPalindrome l | length l <= 3 = head(l) == last(l)
-               | otherwise = isPalindrome(tail (init l))
+isPalindrome [] = True
+isPalindrome [x] = True
+isPalindrome l | head(l) /= last(l) = False
+               | otherwise          = isPalindrome (tail (init l))
+
 
 -- Problem 7
--- data NestedList a = Elem a | List [NestedList a]
+-- Flatten a nested list structure.
+data NestedList a = Elem a | List [NestedList a]
 -- myFlatten :: NestedList a -> [a]
