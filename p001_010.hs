@@ -64,3 +64,15 @@ flatten (List (x:xs)) = flatten x ++ flatten' xs
     flatten' :: [NestedList a] -> [a]
     flatten' [] = []
     flatten' (x:xs) = flatten x ++ flatten' xs
+
+
+-- Problem 8
+-- Eliminate consecutive duplicates of list elements.
+-- If a list contains repeated elements they should be replaced with a single
+-- copy of the element. The order of the elements should not be changed.
+compress :: Eq a => [a] -> [a]
+compress [] = []
+compress [x] = [x]
+compress (x:y:xs)
+  | x == y    = compress (y:xs)
+  | otherwise = [x] ++ compress (y:xs)
