@@ -47,11 +47,17 @@ myReverse list = reverse' [] list
 isPalindrome :: Eq a => [a] -> Bool
 isPalindrome [] = True
 isPalindrome [x] = True
-isPalindrome l | head(l) /= last(l) = False
-               | otherwise          = isPalindrome (tail (init l))
+isPalindrome list | head(list) /= last(list) = False
+                  | otherwise = isPalindrome (tail (init list))
 
 
 -- Problem 7
 -- Flatten a nested list structure.
-data NestedList a = Elem a | List [NestedList a]
--- myFlatten :: NestedList a -> [a]
+-- Transform a list, possibly holding lists as elements into a `flat' list by
+-- replacing each list with its elements (recursively).
+data NestedList a = Elem a | List [NestedList a] deriving (Show)
+-- flatten :: NestedList a -> [a]
+-- flatten Elem a e = [e]
+-- flatten (x:xs) = flatten' x ++ flatten' xs
+--   where
+--     flatten' y
