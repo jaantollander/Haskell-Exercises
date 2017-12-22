@@ -76,3 +76,23 @@ compress [x] = [x]
 compress (x:y:xs)
   | x == y    = compress (y:xs)
   | otherwise = [x] ++ compress (y:xs)
+
+
+-- Problem 9
+-- Pack consecutive duplicates of list elements into sublists. If a list
+-- contains repeated elements they should be placed in separate sublists.
+
+-- Splits the list into a pair of lists where all the elements in the first
+-- list are equal.
+-- "aaaa" -> ("aaaa", "")
+-- "aaaabccaaddeeee" -> ("aaaa", "bccaaddeeee")
+split' :: Eq a => ([a], [a]) -> ([a], [a])
+split' ([], []) = ([], [])
+split' ([], (y:ys)) = split' ([y], ys)
+split' (xs, []) = (xs, [])
+split' ((x:xs), (y:ys))
+  | x == y    = split' ((x:y:xs), ys)
+  | otherwise = ((x:xs), (y:ys))
+
+-- Aplly split recursively
+-- pack :: Eq a => [a] -> [[a]]
