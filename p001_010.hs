@@ -94,5 +94,14 @@ split' ((x:xs), (y:ys))
   | x == y    = split' ((x:y:xs), ys)
   | otherwise = ((x:xs), (y:ys))
 
--- Aplly split recursively
--- pack :: Eq a => [a] -> [[a]]
+-- Apply split recursively
+--  list = "aaaabccaaddeeee"
+--      split' (list, []) -> ("aaaa", "bccaaddeeee")
+--   -> ("aaaa", "b", "ccaaddeeee")
+--   -> ...
+--   -> ("aaaa", "b", "cc", "aa", "dd", "eeee")
+pack :: Eq a => [a] -> [[a]]
+pack list = pack' $ split' ([], list)
+  where
+    pack' (h, []) = [h]
+    pack' (h, t) = [h] ++ pack(t)
