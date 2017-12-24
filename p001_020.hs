@@ -168,3 +168,10 @@ encodeDirect list =
     encodeDirect' (x:xs) =
       let (num, y, ys) = encodeDirect'' 1 x xs
       in (makeEncoding num y, ys)
+
+
+-- Problem 14
+-- Duplicate the elements of a list.
+dupli :: [a] -> [a]
+dupli [] = []
+dupli (x:xs) = [x, x] ++ dupli(xs)
