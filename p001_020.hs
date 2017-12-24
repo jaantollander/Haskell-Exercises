@@ -129,3 +129,15 @@ makeEncoding num item
   | otherwise = Multiple num item
 encodeModified :: Eq a => [a] -> [Encoding a]
 encodeModified list = map (\x -> makeEncoding (length x) (head x)) (pack list)
+
+
+-- Problem 12
+-- Decode a run-length encoded list.
+-- Given a run-length code list generated as specified in problem 11. Construct
+-- its uncompressed version.
+unmakeEncoding :: Encoding a -> [a]
+unmakeEncoding (Single item) = [item]
+unmakeEncoding (Multiple num item) = [item | _ <- [1..num]]
+
+decodeModified :: [Encoding a] -> [a]
+decodeModified list = foldr (++) [] (map unmakeEncoding list)
