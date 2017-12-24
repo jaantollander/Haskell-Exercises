@@ -141,3 +141,23 @@ unmakeEncoding (Multiple num item) = [item | _ <- [1..num]]
 
 decodeModified :: [Encoding a] -> [a]
 decodeModified list = foldr (++) [] (map unmakeEncoding list)
+
+
+-- Problem 13
+-- Run-length encoding of a list (direct solution).
+-- Implement the so-called run-length encoding data compression method directly.
+-- I.e. don't explicitly create the sublists containing the duplicates, as in
+-- problem 9, but only count them. As in problem P11, simplify the result list
+-- by replacing the singleton lists (1 X) by X.
+
+-- "aaaabccaadeeee"
+-- -> (4, 'a'), "bbccaaddeeee"
+-- -> (4, 'a'), (2, 'b'), "ccaaddeeee"
+encodeDirect :: [a] -> [Encoding a]
+encodeDirect [] = []
+encodeDirect list =
+  let (encoding, list_tail) = encodeDirect' lists
+  encoding:(encodeDirect list_tail)
+  where
+    encodeDirect' :: [a] -> (Encoding a, [a])
+    ...
