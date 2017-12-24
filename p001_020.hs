@@ -149,15 +149,22 @@ decodeModified list = foldr (++) [] (map unmakeEncoding list)
 -- I.e. don't explicitly create the sublists containing the duplicates, as in
 -- problem 9, but only count them. As in problem P11, simplify the result list
 -- by replacing the singleton lists (1 X) by X.
-
--- "aaaabccaadeeee"
--- -> (4, 'a'), "bbccaaddeeee"
--- -> (4, 'a'), (2, 'b'), "ccaaddeeee"
-encodeDirect :: [a] -> [Encoding a]
+encodeDirect :: Eq a => [a] -> [Encoding a]
 encodeDirect [] = []
 encodeDirect list =
-  let (encoding, list_tail) = encodeDirect' lists
-  encoding:(encodeDirect list_tail)
+  let (encoding, list_tail) = encodeDirect' list
+  -- Recursion terminates when list_tail is empty list.
+  in encoding:(encodeDirect list_tail)
+
   where
-    encodeDirect' :: [a] -> (Encoding a, [a])
-    ...
+    encodeDirect'' :: Eq a => Int -> a -> [a] -> (Int, a, [a])
+    encodeDirect'' num e [] = (num, e, [])
+    encodeDirect'' num e (x:xs)
+       | e == x    = encodeDirect'' (num + 1) e xs
+       | otherwise = (num, e, (x:xs))
+
+    -- "aaaabccaadeeee" -> (4, 'a'), "bbccaaddeeee"
+    encodeDirect' :: Eq a => [a] -> (Encoding a, [a])
+    encodeDirect' (x:xs) =
+      let (num, y, ys) = encodeDirect'' 1 x xs
+      in (makeEncoding num y, ys)
