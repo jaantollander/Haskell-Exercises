@@ -115,3 +115,17 @@ pack list = pack' $ split' ([], list)
 encode :: Eq a => [a] -> [(Int, a)]
 encode [] = error ""
 encode list = map (\x -> (length x, head x)) (pack list)
+
+
+-- Problem 11
+-- Modified run-length encoding.
+-- Modify the result of problem 10 in such a way that if an element has no
+-- duplicates it is simply copied into the result list. Only elements with
+-- duplicates are transferred as (N E) lists.
+data Encoding a = Single a | Multiple Int a deriving (Show)
+makeEncoding :: Int -> a -> Encoding a
+makeEncoding num item
+  | num == 1  = Single item
+  | otherwise = Multiple num item
+encodeModified :: Eq a => [a] -> [Encoding a]
+encodeModified list = map (\x -> makeEncoding (length x) (head x)) (pack list)
