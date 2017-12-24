@@ -174,4 +174,33 @@ encodeDirect list =
 -- Duplicate the elements of a list.
 dupli :: [a] -> [a]
 dupli [] = []
-dupli (x:xs) = [x, x] ++ dupli(xs)
+dupli (x:xs) = [x, x] ++ dupli xs
+
+
+
+-- Problem 15
+-- Replicate the elements of a list a given number of times
+repli :: [a] -> Int -> [a]
+repli [] _ = []
+repli (x:xs) num = [x | _ <- [1..num]] ++ repli xs num
+
+
+-- Problem 16
+-- Drop every N'th element from a list
+dropEvery :: [a] -> Int -> [a]
+dropEvery list n = [e | (e, i) <- zip list [1..], mod i n /= 0]
+
+
+-- Problem 17
+-- Split a list into two parts; the length of the first part is given.
+-- Do not use any predefined predicates.
+split :: [a] -> Int -> ([a], [a])
+split [] _ = ([], [])
+split list n =
+  let (pair, _) = split' ([], list) n
+  in pair
+  where
+    split' :: ([a], [a]) -> Int -> (([a], [a]), Int)
+    split' pair 0 = (pair, 0)
+    split' (h, []) m = ((h, []), m)
+    split' (h, (x:xs)) m = split' (h ++ [x], xs) (m - 1)
