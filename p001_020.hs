@@ -208,4 +208,23 @@ split list n =
 
 -- Problem 18
 slice :: [a] -> Int -> Int -> [a]
-slice list n m = drop (n - 1) (take m list)
+slice list n m
+  | n > m  = error "n shouldn't be larger than m"
+  | n < 0  = error "n and m should be positive "
+  | otherwise = drop (n - 1) (take m list)
+
+
+-- Problem 19
+-- Rotate a list N places to the left.
+-- Hint: Use the predefined functions length and (++).
+rotate :: [a] -> Int -> [a]
+rotate [] _ = []
+rotate list 0 = list
+rotate list num
+  | num < 0   = rotate list (l - (mod (-num) l))
+  | num >= l  = rotate list (mod num l)
+  | otherwise =
+    let (h, t) = split list num
+    in t ++ h
+  where
+    l = length list
