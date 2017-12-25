@@ -204,3 +204,8 @@ split list n =
     split' pair 0 = (pair, 0)
     split' (h, []) m = ((h, []), m)
     split' (h, (x:xs)) m = split' (h ++ [x], xs) (m - 1)
+
+
+-- Problem 18
+slice :: [a] -> Int -> Int -> [a]
+slice list n m = drop (n - 1) (take m list)
