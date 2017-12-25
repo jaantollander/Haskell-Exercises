@@ -228,3 +228,27 @@ rotate list num
     in t ++ h
   where
     l = length list
+
+
+-- Problem 20
+-- Remove the K'th element from a list.
+removeAt :: Int -> [a] -> (a, [a])
+removeAt _ [] = error ""
+removeAt i list@(e:_)
+  | i < 1     = error ""
+  | i > l     = error ""
+  | otherwise = removeAt' i e list
+  where
+    l = length list
+    removeAt' :: Int -> a -> [a] -> (a, [a])
+    removeAt' i e [] = (e, [])
+    removeAt' i e (x:xs)
+      | i > 1  =
+        let (e2, list) = removeAt' (i - 1) e xs
+        in (e2, x:list)
+      | i == 1 =
+        let (e2, list) = removeAt' (i - 1) x xs
+        in (e2, list)
+      | i < 1  =
+        let (e2, list) = removeAt' (i - 1) e xs
+        in (e2, x:list)
