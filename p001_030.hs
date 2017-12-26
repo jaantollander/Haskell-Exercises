@@ -249,3 +249,12 @@ removeAt i list@(e:_)
       | otherwise =
         let (e2, list) = removeAt' (i - 1) e xs
         in (e2, x:list)
+
+
+-- Problem 21
+-- Insert an element at a given position into a list.
+insertAt :: a -> [a] -> Int -> [a]
+insertAt _ [] _ = []
+insertAt element (x:xs) index
+  | index == 1 = element:x:(insertAt element xs (index - 1))
+  | otherwise  = x:(insertAt element xs (index - 1))
