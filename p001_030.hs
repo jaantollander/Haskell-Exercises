@@ -254,7 +254,17 @@ removeAt i list@(e:_)
 -- Problem 21
 -- Insert an element at a given position into a list.
 insertAt :: a -> [a] -> Int -> [a]
+insertAt element [] 1 = [element]
 insertAt _ [] _ = []
-insertAt element (x:xs) index
-  | index == 1 = element:x:(insertAt element xs (index - 1))
+insertAt element list@(x:xs) index
+  | index == 1 = element:(insertAt element list (index - 1))
   | otherwise  = x:(insertAt element xs (index - 1))
+
+
+-- Problem 22
+-- Create a list containing all integers within a given range.
+range :: Int -> Int -> [Int]
+range start end
+  | start > end  = []
+  | start == end = [start]
+  | otherwise    = start:(range (start + 1) end)
