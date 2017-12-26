@@ -14,6 +14,7 @@ Some good resources for learning Haskell
 * [Learn you a Haskell for Great Good! (Book)](http://learnyouahaskell.com)
 * [Learning Haskell](learn.hfm.io)
 * [Prelude (Haskell standard library reference)]( https://hackage.haskell.org/package/base-4.10.1.0/docs/Prelude.html)
+* [Hackage (Haskell packages)](https://hackage.haskell.org/)
 
 ## Interactive Developement
 Develop Haskell code interactively using
