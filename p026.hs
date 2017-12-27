@@ -6,10 +6,9 @@ combinations :: Int -> [a] -> [[a]]
 combinations _ [] = error ""
 combinations k list@(x:xs)
   | k == 0 = [[]]
-  | k == 1 = [[x] | x <- list]
+  | k == 1 = [[e] | e <- list]
   | k == l = [list]
   | k >= l = error ""
-  | otherwise =
-    [x:c | c <- (combinations (k - 1) xs)] ++ (combinations k xs)
+  | otherwise = [x:c | c <- (combinations (k - 1) xs)] ++ (combinations k xs)
   where
     l = length list
