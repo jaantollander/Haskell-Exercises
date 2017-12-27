@@ -1,11 +1,15 @@
 -- Problem 26
 -- Generate the combinations of K distinct objects chosen from the N elements
 -- of a list
+-- https://en.wikipedia.org/wiki/Combination
 combinations :: Int -> [a] -> [[a]]
 combinations _ [] = error ""
-combinations 1 list = map (\x -> [x]) list
-combinations n list
-  | n == (length list) = [list]
+combinations k list@(x:xs)
+  | k == 0 = [[]]
+  | k == 1 = [[x] | x <- list]
+  | k == l = [list]
+  | k >= l = error ""
   | otherwise =
-    let (h, t) = splitAt (n - 1) list
-    in (map (\x -> h ++ [x]) t) ++ (combinations n (tail list))
+    [x:c | c <- (combinations (k - 1) xs)] ++ (combinations k xs)
+  where
+    l = length list
