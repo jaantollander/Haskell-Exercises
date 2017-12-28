@@ -1,6 +1,6 @@
 -- Problem 26
 -- Generate the combinations of K distinct objects chosen from the N elements
--- of a list
+-- of a list.
 combinations :: Int -> [a] -> [[a]]
 combinations _ [] = error ""
 combinations k list@(x:xs)
