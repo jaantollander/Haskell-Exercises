@@ -54,3 +54,13 @@ totient m = sum [value (coprime r m) | r <- [1..(m-1)]]
 -- Problem 35
 -- Determine the prime factors of a given positive integer. Construct a flat
 -- list containing the prime factors in ascending order.
+-- https://en.wikipedia.org/wiki/Integer_factorization
+-- https://en.wikipedia.org/wiki/Trial_division
+primeFactors :: Integral a => a -> [a]
+primeFactors n = primeFactors' n 2
+  where
+    primeFactors' :: Integral a => a -> a -> [a]
+    primeFactors' n f
+      | n <= 1 = []
+      | (mod n f) == 0 = f:(primeFactors' (div n f) f)
+      | otherwise = primeFactors' n (f+1)
