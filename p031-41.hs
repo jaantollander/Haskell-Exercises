@@ -64,3 +64,27 @@ primeFactors n = primeFactors' n 2
       | n <= 1 = []
       | (mod n f) == 0 = f:(primeFactors' (div n f) f)
       | otherwise = primeFactors' n (f+1)
+
+
+-- Problem 36
+-- Determine the prime factors of a given positive integer.
+-- Construct a list containing the prime factors and their multiplicity.
+prime_factors_mult :: Integral a => a -> [(a, Int)]
+prime_factors_mult n = collect_all $ primeFactors n
+  where
+    -- collect [3, 3, 5, 7]
+    -- ((3, 2), [5, 7])
+    -- collect [5, 7]
+    -- ((5, 1), [7])
+    -- collect [7]
+    -- ((7, 1), [])
+    collect :: Integral a => [a] -> ((a, Int), [a])
+    collect list@(x:xs) =
+      let (h, list') = break (/=x) list
+      in ((x, length h), list')
+
+    collect_all :: Integral a => [a] -> [(a, Int)]
+    collect_all [] = []
+    collect_all list =
+      let (element, list') = collect list
+      in element:(collect_all list')
