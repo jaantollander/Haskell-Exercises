@@ -22,15 +22,3 @@ Develop Haskell code interactively using the ghci provided by your stack install
 ```
 stack ghci <filename>.hs
 ```
-
-## Progress
-- [x] 001 - 010 : 2017-12-23
-- [x] 011 - 020 : 2017-12-25
-- [ ] 021 - 030
-- [ ] 031 - 040
-- [ ] 041 - 050
-- [ ] 051 - 060
-- [ ] 061 - 070
-- [ ] 071 - 080
-- [ ] 081 - 090
-- [ ] 091 - 100
