@@ -17,10 +17,10 @@ Some good resources for learning Haskell
 * [Hackage (Haskell packages)](https://hackage.haskell.org/)
 
 ## Interactive Developement
-Develop Haskell code interactively using
+Develop Haskell code interactively using the ghci provided by your stack installation
 
 ```
-ghci <filename>.hs
+stack ghci <filename>.hs
 ```
 
 ## Progress
