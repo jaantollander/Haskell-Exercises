@@ -88,3 +88,34 @@ prime_factors_mult n = collect_all $ primeFactors n
     collect_all list =
       let (element, list') = collect list
       in element:(collect_all list')
+
+
+-- Problem 37
+-- Calculate Euler's totient function phi(m) (improved).
+-- See problem 34 for the definition of Euler's totient function. If the list
+-- of the prime factors of a number m is known in the form of problem 36 then
+-- the function phi(m) can be efficiently calculated as follows: Let ((p1 m1)
+-- (p2 m2) (p3 m3) ...) be the list of prime factors (and their multiplicities)
+-- of a given number m. Then phi(m) can be calculated with the following
+-- formula:
+phi :: Int -> Int
+phi m = product [(p-1) * p ^ (m-1) | (p, m) <- prime_factors_mult m]
+
+
+-- Problem 39
+-- A list of prime numbers.
+-- Given a range of integers by its lower and upper limit, construct a list of
+-- all prime numbers in that range.
+-- https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+primes :: Integral a => a -> [a]
+primes end = primes' end 2 [2..end]
+  where
+    primes' :: Integral a => a -> a -> [a] -> [a]
+    primes' end prime list
+      | prime^2 > end = list
+      | otherwise =
+        let list' = filter (\x -> (mod x prime) /= 0) list
+        in prime:(primes' end (head list') list')
+
+primesR :: Integral a => a -> a -> [a]
+primesR start end = dropWhile (<start) (primes end)
