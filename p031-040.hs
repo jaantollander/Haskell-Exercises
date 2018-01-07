@@ -119,3 +119,24 @@ primes end = primes' end 2 [2..end]
 
 primesR :: Integral a => a -> a -> [a]
 primesR start end = dropWhile (<start) (primes end)
+
+
+-- Problem 40
+-- Goldbach's conjecture says that every positive even number greater than 2 is
+-- the sum of two prime numbers.
+-- https://en.wikipedia.org/wiki/Goldbach%27s_conjecture
+-- p = primes n
+-- candidate prime for pair p2' = n - p1
+-- test p2' is prime (p2' ∈ p)
+goldbach :: Integral a => a -> [(a, a)]
+goldbach n
+  |(n > 2) && (even n) = goldbach' n (primes n)
+  | otherwise = error "n should even number larger than 2"
+  where
+    goldbach' :: Integral a => a -> [a] -> [(a, a)]
+    goldbach' _ [] = []
+    goldbach' n candidates@(p:ps)
+      | isPrime p2 = (p, p2):(goldbach' n ps)
+      | otherwise  = goldbach' n ps
+      where
+         p2 = n - p
